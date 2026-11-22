@@ -8,3 +8,4 @@
 - Acompanhar atualizações do CLI shadcn e seus avisos moderados de dependências de desenvolvimento (audit de produção sem vulnerabilidades).
 - Validar com o responsável pela marca a direção "Tração", o símbolo em L, o logotipo, a paleta e as aplicações do brandbook antes de adotá-los como padrão oficial.
 - Testar reconhecimento e similaridade do símbolo, legibilidade da assinatura em tamanho pequeno e contraste nos protótipos finais antes de produzir os assets definitivos.
+- Regerar o grafo Graphify após alterações estruturais no código; avaliar extração semântica dos documentos somente se ela trouxer valor e houver backend/autorização apropriados.

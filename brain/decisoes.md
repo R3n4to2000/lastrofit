@@ -7,3 +7,4 @@
 - 2026-11-21: usar PostCSS e Webpack para compilação; o pipeline Turbopack gerado pelo scaffold falhou ao iniciar o worker de CSS neste ambiente.
 - 2026-11-21: forçar renderização dinâmica da área interna para validar sessão por requisição, inclusive quando o build ocorre sem variáveis Supabase.
 - 2026-11-21: produzir o brandbook visual da direção criativa "Tração" como proposta para validação, sem aplicar a identidade ao aplicativo nesta etapa.
+- 2026-11-21: integrar Graphify como ferramenta de desenvolvimento local, com skill versionada em `.agents/skills/graphify/` e grafo do código em `brain/graphify/graphify-out/`; a primeira extração usa apenas AST, sem IA externa.

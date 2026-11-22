@@ -41,6 +41,16 @@ O tema usa tokens CSS semânticos (cores, bordas e raio) em src/app/globals.css.
 
 Execute npm run lint, npm run typecheck e npm run build. O build usa Webpack e PostCSS devido a uma falha do worker Turbopack neste ambiente. Ainda não existe suíte de testes automatizados nesta base. A primeira suíte deve cobrir os fluxos de autenticação e as regras de domínio quando o backend for configurado.
 
+## Mapa do código com Graphify
+
+O grafo local fica em `brain/graphify/graphify-out/`. Abra `graph.html` para explorar as relações ou consulte pelo terminal:
+
+```powershell
+graphify query "Quais arquivos participam da autenticação Supabase?" --graph brain/graphify/graphify-out/graph.json
+```
+
+Para reconstruir o grafo após alterações no código, execute `graphify extract . --code-only --out brain/graphify` e `graphify cluster-only brain/graphify --no-label`. A skill do Graphify está em `.agents/skills/graphify/`. Veja [brain/graphify/README.md](brain/graphify/README.md) para instalação da CLI e limites da extração.
+
 ## Próximas etapas
 
 - Configurar projeto Supabase e validar login/cadastro com e-mail real.
