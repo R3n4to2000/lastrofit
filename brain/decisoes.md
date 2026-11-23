@@ -12,3 +12,4 @@
 - 2026-11-21: usar e-mails SSR com `token_hash` para confirmação e recuperação; exigir autodeclaração de maioridade no cadastro e não armazenar chave privilegiada no app.
 - 2026-11-23: nos testes RLS, executar a tentativa de `UPDATE` em comando próprio e conferir o valor persistido como administrador; aceitar o erro do gatilho de integridade quando ele rejeitar uma série antes da política de `INSERT`.
 - 2026-11-23: manter `supabase/.temp/` e `supabase/.branches/` fora do Git; preservar migrações, testes, templates, configuração e snippets legítimos ao reescrever o único commit local bloqueado pelo push protection.
+- 2026-11-23: usar fluxo implícito somente no pedido de recuperação para compatibilidade com o modelo de e-mail padrão do Supabase hospedado; converter os tokens do fragmento em sessão SSR no servidor. Manter `token_hash` para os modelos locais/personalizados e consumir a confirmação após clique do usuário.

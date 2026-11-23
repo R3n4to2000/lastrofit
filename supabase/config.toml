@@ -2,7 +2,7 @@ project_id = "lastrofit"
 
 [auth]
 site_url = "http://localhost:3000"
-additional_redirect_urls = ["http://localhost:3000/auth/confirm"]
+additional_redirect_urls = ["http://localhost:3000/auth/confirm", "http://localhost:3000/auth/verificar"]
 
 [auth.email]
 enabled = true

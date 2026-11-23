@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createPasswordResetClient } from "@/lib/supabase/password-reset";
 
 function appUrl() {
   return process.env.APP_URL?.replace(/\/$/, "");
@@ -45,11 +46,11 @@ export async function signOut() {
 export async function requestPasswordReset(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
   if (!email || email.length > 254) redirect("/recuperar-senha?erro=campos");
-  const supabase = await createSupabaseServerClient();
+  const supabase = createPasswordResetClient();
   const origin = appUrl();
   if (!supabase || !origin) redirect("/recuperar-senha?erro=configuracao");
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${origin}/auth/confirm?type=recovery`,
+    redirectTo: `${origin}/auth/verificar`,
   });
   if (error) redirect("/recuperar-senha?erro=envio");
   // Keep the response identical for existing and unknown addresses.

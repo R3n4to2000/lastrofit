@@ -19,12 +19,14 @@ Chaves estrangeiras compostas impedem que agenda, sessão e registro de séries 
 
 ## Auth e recuperação
 
-Defina `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` e `APP_URL` no ambiente do servidor; copie apenas os nomes de `.env.example`. O ambiente local está configurado em `config.toml`, com confirmação de e-mail e templates em `templates/`. No painel Supabase Auth hospedado, defina **Site URL** igual a `APP_URL` e permita `${APP_URL}/auth/confirm` nas URLs de redirecionamento. Copie os modelos SSR equivalentes para o painel:
+Defina `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` e `APP_URL` no ambiente do servidor; copie apenas os nomes de `.env.example`. O ambiente local está configurado em `config.toml`, com confirmação de e-mail e templates em `templates/`. No painel Supabase Auth hospedado, defina **Site URL** igual a `APP_URL` e cadastre a URL exata `${APP_URL}/auth/verificar` em **Redirect URLs**. O `APP_URL` deve apontar para a mesma origem que o usuário abre no navegador. O modelo padrão do Supabase hospedado usa `ConfirmationURL`; a recuperação no app recebe os tokens no fragmento do navegador, remove o fragmento da barra de endereço e cria a sessão no servidor antes de abrir `/redefinir-senha`. Solicite um **novo** e-mail após alterar a configuração: links anteriores continuam com o destino antigo ou já foram consumidos.
+
+Se o projeto hospedado permitir modelos personalizados, copie os modelos SSR equivalentes para o painel:
 
 - Confirmação: `{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email`.
 - Recuperação: `{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=recovery`.
 
-O endpoint também aceita `code` PKCE. Um link válido de recuperação cria sessão temporária e leva a `/redefinir-senha`; após trocar a senha, o usuário sai da sessão. A resposta de solicitação é igual para e-mails existentes e desconhecidos. Configure limites de envio e proteção contra abuso no Auth/provedor de e-mail. O cadastro exige declaração de maioridade; ela é uma autodeclaração, não verificação documental.
+O endpoint também aceita `code` PKCE. Links com `token_hash` passam por uma página que exige um clique antes de consumir o token, para evitar pré-visualizações automáticas de e-mail. O modelo padrão hospedado valida o link diretamente no Supabase antes de retornar ao app; quando for possível personalizar o modelo de e-mail, prefira `token_hash` para proteger também essa etapa contra verificadores automáticos de links. Um link válido de recuperação cria sessão temporária e leva a `/redefinir-senha`; após trocar a senha, o usuário sai da sessão. A resposta de solicitação é igual para e-mails existentes e desconhecidos. Configure limites de envio e proteção contra abuso no Auth/provedor de e-mail. O cadastro exige declaração de maioridade; ela é uma autodeclaração, não verificação documental.
 
 ## Testes
 

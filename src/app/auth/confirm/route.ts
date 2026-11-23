@@ -1,21 +1,23 @@
-import { type EmailOtpType } from "@supabase/supabase-js";
 import { type NextRequest, NextResponse } from "next/server";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
   const type = url.searchParams.get("type");
   const tokenHash = url.searchParams.get("token_hash");
   const code = url.searchParams.get("code");
-  const supabase = await createSupabaseServerClient();
-  let valid = false;
-  if (supabase && tokenHash && (type === "email" || type === "recovery")) {
-    const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type: type as EmailOtpType });
-    valid = !error;
-  } else if (supabase && code) {
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    valid = !error;
+  if ((type !== "email" && type !== "recovery") ||
+      (!tokenHash && !code) ||
+      (tokenHash && tokenHash.length > 2048) ||
+      (code && code.length > 2048)) {
+    return NextResponse.redirect(new URL("/entrar?aviso=link-invalido", url.origin));
   }
-  const destination = valid ? (type === "recovery" ? "/redefinir-senha" : "/inicio") : "/entrar?aviso=link-invalido";
-  return NextResponse.redirect(new URL(destination, url.origin));
+
+  // E-mail clients may prefetch GET links. Verification must happen after a user action.
+  const next = new URL("/auth/verificar", url.origin);
+  next.searchParams.set("type", type);
+  if (tokenHash) next.searchParams.set("token_hash", tokenHash);
+  else if (code) next.searchParams.set("code", code);
+  const response = NextResponse.redirect(next);
+  response.headers.set("Referrer-Policy", "no-referrer");
+  return response;
 }

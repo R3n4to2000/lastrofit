@@ -3,6 +3,7 @@
 - Informar as variáveis reais do projeto Supabase em `.env.local` e validar autenticação de ponta a ponta.
 - Aplicar a migração em projeto Supabase de desenvolvimento hospedado, quando disponível; validar os e-mails de confirmação e recuperação com duas contas fictícias. A suíte RLS local passou com 24 testes em 2026-11-23.
 - Configurar `APP_URL`, Site URL e templates de e-mail SSR no painel Supabase; confirmar limites de envio.
+- Testar um novo e-mail de recuperação de ponta a ponta com a URL de retorno já cadastrada no Supabase hospedado. O modelo padrão hospedado ainda pode ter o link consumido por verificadores automáticos; preferir `token_hash` quando houver SMTP/modelo personalizado.
 - Revisar política de retenção e rotina de exclusão para `ai_conversations` antes de ativar IA.
 - Definir requisitos clínicos e de produto antes de criar orientação de treinos.
 - Avaliar compartilhamento de domínio com o futuro aplicativo React Native.
