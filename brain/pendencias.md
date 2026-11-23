@@ -1,8 +1,9 @@
 # Pendências
 
 - Informar as variáveis reais do projeto Supabase em `.env.local` e validar autenticação de ponta a ponta.
-- Definir schema PostgreSQL, migrações e políticas RLS antes de armazenar dados de usuário ou treinos.
-- Implementar recuperação de senha e testes de integração da autenticação.
+- Aplicar a migração em projeto Supabase de desenvolvimento hospedado, quando disponível; validar os e-mails de confirmação e recuperação com duas contas fictícias. A suíte RLS local passou com 24 testes em 2026-11-23.
+- Configurar `APP_URL`, Site URL e templates de e-mail SSR no painel Supabase; confirmar limites de envio.
+- Revisar política de retenção e rotina de exclusão para `ai_conversations` antes de ativar IA.
 - Definir requisitos clínicos e de produto antes de criar orientação de treinos.
 - Avaliar compartilhamento de domínio com o futuro aplicativo React Native.
 - Acompanhar atualizações do CLI shadcn e seus avisos moderados de dependências de desenvolvimento (audit de produção sem vulnerabilidades).
