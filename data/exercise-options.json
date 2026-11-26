@@ -1,0 +1,26 @@
+{
+  "muscle_groups": [
+    { "value": "legs", "label": "Pernas" },
+    { "value": "glutes", "label": "Glúteos" },
+    { "value": "back", "label": "Costas" },
+    { "value": "arms", "label": "Braços" },
+    { "value": "chest", "label": "Peito" },
+    { "value": "shoulders", "label": "Ombros" },
+    { "value": "core", "label": "Abdômen" },
+    { "value": "calves", "label": "Panturrilhas" }
+  ],
+  "equipment": [
+    { "value": "bodyweight", "label": "Peso do corpo" },
+    { "value": "chair", "label": "Cadeira" },
+    { "value": "band", "label": "Elástico" },
+    { "value": "dumbbell", "label": "Halteres" },
+    { "value": "barbell", "label": "Barra" },
+    { "value": "machine", "label": "Máquina" },
+    { "value": "cable", "label": "Cabo" }
+  ],
+  "difficulty": [
+    { "value": "beginner", "label": "Iniciante" },
+    { "value": "intermediate", "label": "Intermediário" },
+    { "value": "advanced", "label": "Avançado" }
+  ]
+}

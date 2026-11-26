@@ -2,12 +2,21 @@
 
 A migração `migrations/20261121000100_initial_auth_schema.sql` cria as dez tabelas de domínio, `admin_users` e funções no schema `private`. Execute-a em um projeto Supabase de desenvolvimento antes de usar o cadastro. Ela não cria catálogo, treinos, cobrança ou IA. Não a aplique automaticamente a um banco compartilhado sem revisar o estado e o backup.
 
+A migração aditiva `migrations/20261125000100_exercise_library.sql` acrescenta `common_mistakes`, índices para o catálogo aprovado e `exercise_substitutions` com chaves estrangeiras, restrição contra auto substituição e RLS. Não altera as dez tabelas de treino existentes nem publica exercícios. `authenticated` vê apenas relações aprovadas cujo exercício de origem e substituto também estão aprovados; `anon` não recebe acesso. A escrita exige conexão administrativa. A aprovação de exercício e de cada relação é uma decisão separada após revisão profissional.
+
+A migração seguinte, `migrations/20261125000200_publish_demo_exercises.sql`, importa e aprova em uma transação os quatro exemplos próprios e as duas relações cuja publicação foi autorizada pelo responsável em 2026-11-25. Ela exige IDs sem colisão e aborta se encontrar conteúdo já aprovado ou contagens inesperadas. Aplique as migrações na ordem versionada; os SVGs são servidos pelo app e precisam estar presentes no deploy da mesma versão.
+
+## Importação do catálogo
+
+`data/demo-exercises.json` e os SVGs em `public/media/exercises/` são conteúdo ilustrativo próprio, sem licença externa. O lote inicial foi autorizado para publicação; isso não aprova lotes futuros. Valide com `npm run import:exercises -- data/demo-exercises.json`. `--out data/import-preview.sql` gera SQL transacional de rascunhos para revisão e aplicação manual; o gerador não acessa o banco nem inclui `approved_at`. Ele verifica IDs, campos permitidos, valores dos filtros, conteúdo, mídias locais, referências e duplicações. Um lote com ID já aprovado é recusado pelo SQL antes de qualquer alteração. O arquivo de saída é criado sem sobrescrever outro arquivo. Não aplique novos lotes em banco compartilhado sem autorização. A mídia em Storage público é resolvida por `src/lib/exercises/media.ts`; a importação atual aceita somente arquivos SVG locais próprios.
+
 ## Políticas
 
 | Dados | `authenticated` | Administração/backend |
 | --- | --- | --- |
 | `profiles` | Lê o próprio perfil e atualiza apenas `full_name` | Lê todos; cria perfil no gatilho de `auth.users` |
 | `exercises`, `workout_templates`, `workout_template_exercises` | Lê somente conteúdo aprovado | Lê rascunhos; escrita com conexão administrativa |
+| `exercise_substitutions` | Lê somente relação aprovada entre dois exercícios aprovados | Lê rascunhos; escrita com conexão administrativa |
 | `user_workout_plans`, `scheduled_workouts` | Lê apenas os próprios | Cria e altera planos e agenda após revisão |
 | `workout_sessions`, `exercise_set_logs` | Lê e registra apenas os próprios, respeitando vínculos e limites | Lê todos; pode reconciliar registros |
 | `ai_conversations`, `subscriptions` | Lê apenas os próprios; sem escrita direta | Escrita apenas pelo backend, quando essas etapas existirem |
@@ -30,6 +39,6 @@ O endpoint também aceita `code` PKCE. Links com `token_hash` passam por uma pá
 
 ## Testes
 
-Com Supabase local e Docker ativos, execute `supabase start`, `supabase db reset` **somente em ambiente descartável** e `supabase test db`. `tests/database/rls_test.sql` usa três identidades fictícias em transação com rollback e verifica acesso entre contas, leitura de rascunhos, elevação administrativa, escrita proibida e chaves compostas. O comando `db reset` destrói dados locais; não o execute em banco compartilhado.
+Com Supabase local e Docker ativos, execute `supabase start`, `supabase db reset` **somente em ambiente descartável** e `supabase test db`. `tests/database/rls_test.sql` usa três identidades fictícias em transação com rollback e verifica acesso entre contas, leitura de rascunhos, elevação administrativa, escrita proibida e chaves compostas. `tests/database/exercise_library_test.sql` verifica visibilidade de exercícios/substitutos, administração, escrita negada, acesso anônimo e a restrição contra auto substituição. O comando `db reset` destrói dados locais; não o execute em banco compartilhado. Execute também `npm run test:import` para a validação do importador.
 
 Faça também o teste de fluxo com duas contas de teste: cadastrar e confirmar e-mail, entrar, sair, solicitar recuperação, abrir o link e trocar a senha. Tente consultar o perfil da outra conta pela API com o token da primeira; a consulta deve retornar zero linhas. Esses fluxos dependem de um projeto Supabase e de e-mail configurados.

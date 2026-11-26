@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-labelledby="title desc">
+  <title id="title">Remada com elástico</title><desc id="desc">Figura simplificada mostra o elástico sendo puxado em direção ao tronco.</desc>
+  <style>
+    .pull{animation:pull 2.8s ease-in-out infinite}@keyframes pull{0%,15%,85%,100%{transform:translateX(0)}45%,55%{transform:translateX(34px)}}
+    @media(prefers-reduced-motion:reduce){.pull{animation:none}}
+  </style>
+  <rect width="400" height="260" rx="24" fill="#eaf2e7"/><path d="M48 218h304" stroke="#98ad9d" stroke-width="4"/>
+  <path d="M80 83v135m-13-135h26" fill="none" stroke="#6a8373" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="271" cy="67" r="20" fill="#b9df78"/>
+  <path d="M271 92v73m0-38 27 34m-27 4-27 50m27-50 29 50" fill="none" stroke="#173e36" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <g class="pull"><path d="M84 132h155" stroke="#386f58" stroke-width="6" stroke-linecap="round"/><path d="M239 132h22" stroke="#173e36" stroke-width="12" stroke-linecap="round"/></g>
+  <text x="24" y="35" fill="#173e36" font-family="Arial,sans-serif" font-size="15" font-weight="700">Prévia ilustrativa</text>
+</svg>

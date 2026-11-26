@@ -18,7 +18,7 @@ export async function proxy(request: NextRequest) {
     },
   });
   const { data } = await supabase.auth.getUser();
-  if (!data.user && /^\/(inicio|semana|perfil)(\/|$)/.test(request.nextUrl.pathname)) {
+  if (!data.user && /^\/(inicio|semana|perfil|exercicios)(\/|$)/.test(request.nextUrl.pathname)) {
     const login = request.nextUrl.clone();
     login.pathname = "/entrar";
     login.searchParams.set("aviso", "entre-para-continuar");
@@ -27,4 +27,4 @@ export async function proxy(request: NextRequest) {
   return response;
 }
 
-export const config = { matcher: ["/inicio/:path*", "/semana/:path*", "/perfil/:path*"] };
+export const config = { matcher: ["/inicio/:path*", "/semana/:path*", "/perfil/:path*", "/exercicios/:path*"] };

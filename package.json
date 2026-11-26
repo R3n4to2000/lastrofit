@@ -7,7 +7,9 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:import": "node --test tests/exercise-import.test.mjs",
+    "import:exercises": "node scripts/exercise-import.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

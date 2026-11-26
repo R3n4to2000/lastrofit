@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-labelledby="title desc">
+  <title id="title">Agachamento com apoio</title><desc id="desc">Figura simplificada alterna entre ficar em pé e flexionar os joelhos com apoio.</desc>
+  <style>
+    .move{animation:squat 3s ease-in-out infinite}@keyframes squat{0%,15%,85%,100%{transform:translateY(0)}45%,55%{transform:translateY(27px)}}
+    @media(prefers-reduced-motion:reduce){.move{animation:none}}
+  </style>
+  <rect width="400" height="260" rx="24" fill="#eaf2e7"/><path d="M48 218h304" stroke="#98ad9d" stroke-width="4"/>
+  <path d="M284 76v143m-23-143h46" fill="none" stroke="#6a8373" stroke-width="9" stroke-linecap="round"/>
+  <g class="move" fill="none" stroke="#173e36" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="193" cy="67" r="20" fill="#b9df78" stroke="none"/><path d="M193 93v70m0-44-32 23m32-23 59 20m-59 24-37 51m37-51 37 51"/>
+  </g><path d="M73 101v53m-9-10 9 10 9-10" fill="none" stroke="#386f58" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="24" y="35" fill="#173e36" font-family="Arial,sans-serif" font-size="15" font-weight="700">Prévia ilustrativa</text>
+</svg>

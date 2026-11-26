@@ -1,7 +1,7 @@
 begin;
 create extension if not exists pgtap with schema extensions;
 set search_path = public, extensions;
-select plan(24);
+select plan(28);
 
 -- All fixtures are rolled back. Metadata mirrors the adult self-attestation in signup.
 insert into auth.users (id, instance_id, aud, role, email, encrypted_password, email_confirmed_at, raw_user_meta_data, raw_app_meta_data)
@@ -42,7 +42,7 @@ insert into public.subscriptions (user_id, provider, provider_subscription_id, s
 set local role authenticated;
 select set_config('request.jwt.claim.sub', '00000000-0000-4000-8000-000000000001', true);
 select is((select count(*)::integer from public.profiles), 1, 'profile isolated');
-select is((select count(*)::integer from public.exercises), 1, 'draft exercise hidden');
+select is((select count(*)::integer from public.exercises where id in ('10000000-0000-4000-8000-000000000001', '10000000-0000-4000-8000-000000000002')), 1, 'draft exercise hidden');
 select is((select count(*)::integer from public.workout_templates), 1, 'draft template hidden');
 select is((select count(*)::integer from public.workout_template_exercises), 1, 'draft template contents hidden');
 select is((select count(*)::integer from public.user_workout_plans), 1, 'plans isolated');
@@ -53,8 +53,14 @@ select is((select count(*)::integer from public.ai_conversations), 1, 'conversat
 select is((select count(*)::integer from public.subscriptions), 1, 'subscriptions isolated');
 select is((select private.is_admin()), false, 'regular user is not administrator');
 update public.profiles set full_name = 'Changed' where user_id = '00000000-0000-4000-8000-000000000002';
+update public.profiles set full_name = 'Own changed' where user_id = '00000000-0000-4000-8000-000000000001';
+update public.workout_sessions set status = 'paused' where user_id = '00000000-0000-4000-8000-000000000002';
+update public.exercise_set_logs set reps = 12 where user_id = '00000000-0000-4000-8000-000000000002';
 reset role;
 select is((select full_name from public.profiles where user_id = '00000000-0000-4000-8000-000000000002'), 'Two', 'cannot update another profile');
+select is((select full_name from public.profiles where user_id = '00000000-0000-4000-8000-000000000001'), 'Own changed', 'own profile update permitted');
+select is((select status from public.workout_sessions where user_id = '00000000-0000-4000-8000-000000000002'), 'in_progress', 'cannot update another session');
+select is((select reps from public.exercise_set_logs where user_id = '00000000-0000-4000-8000-000000000002'), null, 'cannot update another set log');
 set local role authenticated;
 select throws_ok($$insert into public.admin_users (user_id) values ('00000000-0000-4000-8000-000000000001')$$, '42501');
 select throws_ok($$insert into public.exercises (name, difficulty) values ('Unreviewed', 'beginner')$$, '42501');
@@ -67,11 +73,12 @@ select throws_ok($$insert into public.exercise_set_logs (user_id, session_id, te
 select set_config('request.jwt.claim.sub', '00000000-0000-4000-8000-000000000003', true);
 select is((select private.is_admin()), true, 'admin comes from protected membership table');
 select is((select count(*)::integer from public.profiles), 3, 'admin can read profiles');
-select is((select count(*)::integer from public.exercises), 2, 'admin can inspect drafts');
+select is((select count(*)::integer from public.exercises where id in ('10000000-0000-4000-8000-000000000001', '10000000-0000-4000-8000-000000000002')), 2, 'admin can inspect drafts');
 reset role;
 set local role anon;
 select throws_ok($$select * from public.profiles$$, '42501');
 reset role;
 select throws_ok($$insert into public.scheduled_workouts (user_id, plan_id, scheduled_on) values ('00000000-0000-4000-8000-000000000001', '40000000-0000-4000-8000-000000000002', current_date + 1)$$, '23503');
+select throws_ok($$insert into public.workout_sessions (user_id, scheduled_workout_id) values ('00000000-0000-4000-8000-000000000001', '50000000-0000-4000-8000-000000000001')$$, '23505');
 select * from finish();
 rollback;

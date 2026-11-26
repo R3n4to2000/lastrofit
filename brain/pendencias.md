@@ -1,13 +1,12 @@
 # Pendências
 
-- Informar as variáveis reais do projeto Supabase em `.env.local` e validar autenticação de ponta a ponta.
-- Aplicar a migração em projeto Supabase de desenvolvimento hospedado, quando disponível; validar os e-mails de confirmação e recuperação com duas contas fictícias. A suíte RLS local passou com 24 testes em 2026-11-23.
-- Configurar `APP_URL`, Site URL e templates de e-mail SSR no painel Supabase; confirmar limites de envio.
-- Testar um novo e-mail de recuperação de ponta a ponta com a URL de retorno já cadastrada no Supabase hospedado. O modelo padrão hospedado ainda pode ter o link consumido por verificadores automáticos; preferir `token_hash` quando houver SMTP/modelo personalizado.
+- Exigir prova de recuperação recente ou reautenticação para atualizar a senha; hoje qualquer sessão válida abre `/redefinir-senha` e pode chamar `updatePassword`.
+- Antes de ativar planos e execução, definir integridade de datas da agenda e imutabilidade de sessões concluídas.
 - Revisar política de retenção e rotina de exclusão para `ai_conversations` antes de ativar IA.
 - Definir requisitos clínicos e de produto antes de criar orientação de treinos.
 - Avaliar compartilhamento de domínio com o futuro aplicativo React Native.
 - Acompanhar atualizações do CLI shadcn e seus avisos moderados de dependências de desenvolvimento (audit de produção sem vulnerabilidades).
 - Validar com o responsável pela marca a direção "Tração", o símbolo em L, o logotipo, a paleta e as aplicações do brandbook antes de adotá-los como padrão oficial.
 - Testar reconhecimento e similaridade do símbolo, legibilidade da assinatura em tamanho pequeno e contraste nos protótipos finais antes de produzir os assets definitivos.
-- Regerar o grafo Graphify após alterações estruturais no código; avaliar extração semântica dos documentos somente se ela trouxer valor e houver backend/autorização apropriados.
+- Avaliar extração SQL no Graphify quando houver necessidade de mapear migrações: a CLI atual não tem `tree_sitter_sql`. Extração semântica de documentos continua opcional e requer backend/autorização apropriados.
+- Publicar a versão do aplicativo com os quatro SVGs em `public/media/exercises/` para que a mídia referenciada pelas linhas do catálogo hospedado esteja disponível fora do ambiente local.

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-labelledby="title desc">
+  <title id="title">Sentar e levantar da cadeira</title><desc id="desc">Figura simplificada alterna entre sentar e levantar.</desc>
+  <style>
+    .move{animation:rise 2.8s ease-in-out infinite}@keyframes rise{0%,15%,85%,100%{transform:translateY(20px)}45%,55%{transform:translateY(-22px)}}
+    @media(prefers-reduced-motion:reduce){.move{animation:none}}
+  </style>
+  <rect width="400" height="260" rx="24" fill="#eaf2e7"/><path d="M48 218h304" stroke="#98ad9d" stroke-width="4"/>
+  <path d="M154 151h86v14h-86zm6 14v53m74-53v53" fill="none" stroke="#6a8373" stroke-width="9" stroke-linecap="round"/>
+  <g class="move" fill="none" stroke="#173e36" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="208" cy="69" r="20" fill="#b9df78" stroke="none"/><path d="M208 94v61m0-40-35 18m35-18 34 16m-34 24-33 48m33-48 33 48"/>
+  </g><path d="M318 157v-52m-9 10 9-10 9 10" fill="none" stroke="#386f58" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="24" y="35" fill="#173e36" font-family="Arial,sans-serif" font-size="15" font-weight="700">Prévia ilustrativa</text>
+</svg>
