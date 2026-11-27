@@ -9,4 +9,8 @@
 - Validar com o responsável pela marca a direção "Tração", o símbolo em L, o logotipo, a paleta e as aplicações do brandbook antes de adotá-los como padrão oficial.
 - Testar reconhecimento e similaridade do símbolo, legibilidade da assinatura em tamanho pequeno e contraste nos protótipos finais antes de produzir os assets definitivos.
 - Avaliar extração SQL no Graphify quando houver necessidade de mapear migrações: a CLI atual não tem `tree_sitter_sql`. Extração semântica de documentos continua opcional e requer backend/autorização apropriados.
-- Publicar a versão do aplicativo com os quatro SVGs em `public/media/exercises/` para que a mídia referenciada pelas linhas do catálogo hospedado esteja disponível fora do ambiente local.
+- Produzir e validar textos pt-BR para os 862 exercícios que permanecem rascunhos; cinco não têm instruções na fonte. Publicar individualmente após revisão do conteúdo efetivamente produzido.
+- Completar e revisar os campos de erros comuns/precauções dos 14 exercícios publicados; o lote de traduções fornecia apenas nome e instruções curtas.
+- Registrar decisões individuais sobre os 55 pares de equivalência sugeridos antes de criar substituições; similaridade de nomes não é aprovação de troca de movimento.
+- Encontrar ou produzir fotos e demonstrações reais com licença comercial para exercícios sem vídeo; conferir direitos por item no wger, se ele for utilizado. Medir tráfego e cache dos 14 vídeos CC0 já espelhados antes de ampliar a mídia.
+- A revisão visual em dispositivos e redes reais foi informada pelo responsável em 2026-11-26, mas não foi reproduzida nesta execução. Verificar a versão implantada do frontend após o deploy para confirmar reprodução e filtros com os dados novos.

@@ -22,10 +22,10 @@ test("não aceita aprovação no arquivo de importação", () => {
   assert.throws(() => validateExercises(entries), /campos ausentes ou não permitidos/);
 });
 
-test("rejeita mídia ausente ou caminho fora do diretório permitido", () => {
+test("rejeita mídia sem proveniência e licença", () => {
   const entries = fixture();
   entries[0].media_url = "/media/exercises/../secret.svg";
-  assert.throws(() => validateExercises(entries), /mídia local ausente ou inválida/);
+  assert.throws(() => validateExercises(entries), /mídia exige importação com licença/);
 });
 
 test("rejeita substituto que não pertence ao lote", () => {

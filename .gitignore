@@ -44,6 +44,11 @@ yarn-error.log*
 # Graphify local extraction cache
 /graphify-out/
 
+# Verified CC0 video downloads prepared for Storage upload
+/data/generated/media/
+/data/generated/*.remote.sql
+/data/generated/remote-*.sql
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -1,0 +1,76 @@
+{
+  "checked": 14,
+  "verified": 14,
+  "results": [
+    {
+      "source_media_id": "barbell-hip-thrust",
+      "status": "verified",
+      "bytes": 479580
+    },
+    {
+      "source_media_id": "barbell-shrug",
+      "status": "verified",
+      "bytes": 361259
+    },
+    {
+      "source_media_id": "bent-over-low-pulley-rear-delt-fly",
+      "status": "verified",
+      "bytes": 630185
+    },
+    {
+      "source_media_id": "dumbbell-bench-press",
+      "status": "verified",
+      "bytes": 535961
+    },
+    {
+      "source_media_id": "dumbbell-shrug",
+      "status": "verified",
+      "bytes": 395334
+    },
+    {
+      "source_media_id": "ez-bar-skullcrusher",
+      "status": "verified",
+      "bytes": 580309
+    },
+    {
+      "source_media_id": "incline-dumbbell-curl",
+      "status": "verified",
+      "bytes": 568802
+    },
+    {
+      "source_media_id": "leg-press",
+      "status": "verified",
+      "bytes": 667366
+    },
+    {
+      "source_media_id": "machine-hack-squat",
+      "status": "verified",
+      "bytes": 750603
+    },
+    {
+      "source_media_id": "seated-calf-raise",
+      "status": "verified",
+      "bytes": 557530
+    },
+    {
+      "source_media_id": "seated-leg-curl",
+      "status": "verified",
+      "bytes": 530075
+    },
+    {
+      "source_media_id": "sit-up",
+      "status": "verified",
+      "bytes": 355090
+    },
+    {
+      "source_media_id": "straight-arm-lat-pull-down",
+      "status": "verified",
+      "bytes": 641063
+    },
+    {
+      "source_media_id": "superman",
+      "status": "verified",
+      "bytes": 507965
+    }
+  ]
+}

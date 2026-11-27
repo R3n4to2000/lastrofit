@@ -7,20 +7,46 @@
     { "value": "chest", "label": "Peito" },
     { "value": "shoulders", "label": "Ombros" },
     { "value": "core", "label": "Abdômen" },
-    { "value": "calves", "label": "Panturrilhas" }
+    { "value": "calves", "label": "Panturrilhas" },
+    { "value": "biceps", "label": "Bíceps" },
+    { "value": "triceps", "label": "Tríceps" },
+    { "value": "forearms", "label": "Antebraços" },
+    { "value": "quadriceps", "label": "Quadríceps" },
+    { "value": "hamstrings", "label": "Posteriores de coxa" },
+    { "value": "adductors", "label": "Adutores" },
+    { "value": "abductors", "label": "Abdutores" },
+    { "value": "lower_back", "label": "Lombar" },
+    { "value": "traps", "label": "Trapézio" },
+    { "value": "neck", "label": "Pescoço" }
   ],
   "equipment": [
     { "value": "bodyweight", "label": "Peso do corpo" },
     { "value": "chair", "label": "Cadeira" },
+    { "value": "bench", "label": "Banco" },
     { "value": "band", "label": "Elástico" },
     { "value": "dumbbell", "label": "Halteres" },
     { "value": "barbell", "label": "Barra" },
     { "value": "machine", "label": "Máquina" },
-    { "value": "cable", "label": "Cabo" }
+    { "value": "cable", "label": "Cabo" },
+    { "value": "ez_bar", "label": "Barra W" },
+    { "value": "exercise_ball", "label": "Bola de exercício" },
+    { "value": "foam_roller", "label": "Rolo de espuma" },
+    { "value": "kettlebell", "label": "Kettlebell" },
+    { "value": "medicine_ball", "label": "Bola medicinal" },
+    { "value": "other", "label": "Outro" }
   ],
   "difficulty": [
     { "value": "beginner", "label": "Iniciante" },
     { "value": "intermediate", "label": "Intermediário" },
     { "value": "advanced", "label": "Avançado" }
+  ],
+  "category": [
+    { "value": "strength", "label": "Musculação" },
+    { "value": "cardio", "label": "Cardio" },
+    { "value": "stretching", "label": "Alongamento" },
+    { "value": "plyometrics", "label": "Pliometria" },
+    { "value": "powerlifting", "label": "Levantamento de potência" },
+    { "value": "olympic weightlifting", "label": "Levantamento olímpico" },
+    { "value": "strongman", "label": "Força" }
   ]
 }

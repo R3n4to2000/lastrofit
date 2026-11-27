@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, isAbsolute, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -6,7 +6,6 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const options = JSON.parse(readFileSync(join(root, "data/exercise-options.json"), "utf8"));
 const allowed = Object.fromEntries(Object.entries(options).map(([key, values]) => [key, new Set(values.map(({ value }) => value))]));
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-const mediaPath = /^\/media\/exercises\/[a-z0-9-]+\.svg$/;
 const fields = ["id", "name", "alternate_names", "muscle_groups", "equipment", "difficulty", "instructions", "common_mistakes", "precautions", "media_url", "media_alt", "substitutes"];
 
 function text(value, min, max, label) {
@@ -23,7 +22,7 @@ function stringArray(value, min, max, itemMax, label) {
   return items;
 }
 
-export function validateExercises(input, { assetRoot = join(root, "public") } = {}) {
+export function validateExercises(input) {
   if (!Array.isArray(input) || input.length < 1 || input.length > 500) throw new Error("Esperada uma lista de 1 a 500 exercícios");
   const ids = new Set();
   const names = new Set();
@@ -46,9 +45,9 @@ export function validateExercises(input, { assetRoot = join(root, "public") } = 
     const instructions = text(entry.instructions, 1, 1000, `${label}.instructions`);
     const commonMistakes = stringArray(entry.common_mistakes, 1, 6, 160, `${label}.common_mistakes`);
     const precautions = text(entry.precautions, 1, 500, `${label}.precautions`);
-    const url = text(entry.media_url, 1, 180, `${label}.media_url`);
-    if (!mediaPath.test(url) || !existsSync(join(assetRoot, url.slice(1)))) throw new Error(`${label}: mídia local ausente ou inválida`);
-    const alt = text(entry.media_alt, 1, 200, `${label}.media_alt`);
+    if (entry.media_url !== null || entry.media_alt !== null) throw new Error(`${label}: mídia exige importação com licença e proveniência`);
+    const url = null;
+    const alt = null;
     const substitutes = stringArray(entry.substitutes, 0, 20, 36, `${label}.substitutes`);
     if (substitutes.some((id) => !uuid.test(id) || id === entry.id)) throw new Error(`${label}: substituto inválido`);
     return { id: entry.id, name, alternate_names: alternateNames, muscle_groups: muscleGroups,
@@ -61,7 +60,7 @@ export function validateExercises(input, { assetRoot = join(root, "public") } = 
   return result;
 }
 
-const quote = (value) => `'${value.replaceAll("'", "''")}'`;
+const quote = (value) => value === null ? "null" : `'${value.replaceAll("'", "''")}'`;
 const sqlArray = (values) => values.length ? `ARRAY[${values.map(quote).join(", ")}]::text[]` : "ARRAY[]::text[]";
 
 export function buildImportSql(entries) {

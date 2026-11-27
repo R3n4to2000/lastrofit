@@ -9,7 +9,7 @@ import { ExerciseMedia } from "./exercise-media";
 export function ExerciseCard({ exercise, preview = false }: { exercise: ExerciseSummary; preview?: boolean }) {
   const href = `/exercicios/${exercise.id}${preview ? "?preview=1" : ""}`;
   return <article className="overflow-hidden rounded-3xl border border-border bg-card p-3 shadow-sm">
-    <ExerciseMedia asset={resolveExerciseMedia(exercise)} />
+    <ExerciseMedia asset={resolveExerciseMedia(exercise)} card />
     <div className="px-2 pb-2 pt-4">
       <Badge variant="secondary" className="text-primary">{optionLabel(difficultyOptions, exercise.difficulty)}</Badge>
       <h2 className="mt-3 text-lg font-semibold leading-snug"><Link href={href} className="rounded-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">{exercise.name}</Link></h2>

@@ -8,8 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test:import": "node --test tests/exercise-import.test.mjs",
-    "import:exercises": "node scripts/exercise-import.mjs"
+    "test:import": "node --test tests/*.test.mjs",
+    "import:exercises": "node scripts/exercise-import.mjs",
+    "import:free-db": "node scripts/import-free-exercise-db.mjs",
+    "verify:exercise-videos": "node scripts/verify-exercise-videos.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

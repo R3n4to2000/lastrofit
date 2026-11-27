@@ -1,29 +1,29 @@
 import { getSupabaseConfig } from "@/lib/supabase/config";
 
-export type ExerciseMediaAsset = { src: string; alt: string; kind: "image" | "video" };
-type MediaInput = { media_url: string | null; media_alt: string | null };
-type MediaProvider = { supports: (value: string) => boolean; resolve: (value: string) => string | null };
+export type ExerciseMediaAsset = { src: string; alt: string; kind: "image" | "video"; poster?: string };
+type MediaRecord = { kind: "cover" | "video" | "animation"; provider: string; asset_path: string; alt_text: string };
+type MediaInput = { media?: MediaRecord[] };
 
-const localProvider: MediaProvider = {
-  supports: (value) => value.startsWith("/media/exercises/"),
-  resolve: (value) => /^\/media\/exercises\/[a-z0-9-]+\.svg$/.test(value) ? value : null,
-};
-
-const storageProvider: MediaProvider = {
-  supports: (value) => value.startsWith("storage:"),
-  resolve: (value) => {
+function resolvePath(record: MediaRecord): string | null {
+  const path = record.asset_path;
+  if (record.provider === "jsdelivr" && /^media\/video\/[a-z0-9-]+\.mp4$/.test(path)) {
+    return `https://cdn.jsdelivr.net/gh/namnq/workout-free-videos@v2.0.0/${path}`;
+  }
+  if (record.provider === "local" && /^\/media\/exercises\/[a-z0-9-]+\.(mp4|webp|png|jpe?g)$/.test(path)) return path;
+  if (record.provider === "supabase_storage" && /^exercise-media\/[a-z0-9/_-]+\.(mp4|webp|png|jpe?g)$/.test(path)) {
     const config = getSupabaseConfig();
-    const key = value.slice("storage:".length);
-    if (!config || !/^exercise-media\/[a-z0-9/_-]+\.(webp|png|jpg|mp4)$/.test(key)) return null;
-    return `${config.url}/storage/v1/object/public/${key}`;
-  },
-};
-
-const providers = [localProvider, storageProvider];
+    return config ? `${config.url}/storage/v1/object/public/${path}` : null;
+  }
+  return null;
+}
 
 export function resolveExerciseMedia(exercise: MediaInput): ExerciseMediaAsset | null {
-  if (!exercise.media_url || !exercise.media_alt?.trim()) return null;
-  const provider = providers.find((candidate) => candidate.supports(exercise.media_url!));
-  const src = provider?.resolve(exercise.media_url);
-  return src ? { src, alt: exercise.media_alt, kind: src.endsWith(".mp4") ? "video" : "image" } : null;
+  const assets = (exercise.media ?? []).filter((record) => record.alt_text.trim())
+    .map((record) => ({ record, src: resolvePath(record) })).filter((item) => item.src);
+  const video = assets.find((item) => item.record.kind === "video");
+  const cover = assets.find((item) => item.record.kind === "cover");
+  const animation = assets.find((item) => item.record.kind === "animation");
+  if (video) return { src: video.src!, alt: video.record.alt_text, kind: "video", poster: cover?.src ?? undefined };
+  const image = cover ?? animation;
+  return image ? { src: image.src!, alt: image.record.alt_text, kind: "image" } : null;
 }

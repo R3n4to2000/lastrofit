@@ -9,8 +9,8 @@
     "instructions": "Sente-se em uma cadeira estável. Levante-se de forma controlada e volte a sentar sem pressa.",
     "common_mistakes": ["Usar uma cadeira instável", "Fazer o movimento com pressa"],
     "precautions": "Use uma cadeira estável. Interrompa a atividade se sentir dor ou tontura.",
-    "media_url": "/media/exercises/chair-rise.svg",
-    "media_alt": "Ilustração animada e simplificada de uma pessoa levantando de uma cadeira",
+    "media_url": null,
+    "media_alt": null,
     "substitutes": ["71000000-0000-4000-8000-000000000002"]
   },
   {
@@ -23,8 +23,8 @@
     "instructions": "Fique próximo de um apoio estável. Flexione os joelhos dentro de uma amplitude confortável e retorne devagar.",
     "common_mistakes": ["Usar apoio que se move", "Acelerar a descida"],
     "precautions": "Use apenas um apoio estável e mantenha uma amplitude confortável.",
-    "media_url": "/media/exercises/supported-squat.svg",
-    "media_alt": "Ilustração animada e simplificada de um movimento de agachar com apoio",
+    "media_url": null,
+    "media_alt": null,
     "substitutes": ["71000000-0000-4000-8000-000000000001"]
   },
   {
@@ -37,8 +37,8 @@
     "instructions": "Segure o elástico com fixação segura. Puxe em direção ao tronco de forma controlada e retorne lentamente.",
     "common_mistakes": ["Usar fixação insegura", "Soltar o elástico de uma vez"],
     "precautions": "Verifique o estado do elástico e a segurança da fixação antes de usar.",
-    "media_url": "/media/exercises/band-row.svg",
-    "media_alt": "Ilustração animada e simplificada de uma remada com elástico",
+    "media_url": null,
+    "media_alt": null,
     "substitutes": []
   },
   {
@@ -51,8 +51,8 @@
     "instructions": "Em pé, use um apoio estável se necessário. Eleve os calcanhares e volte ao chão de forma controlada.",
     "common_mistakes": ["Perder o equilíbrio", "Fazer o movimento com impulso"],
     "precautions": "Use um apoio estável se precisar de equilíbrio. Procure orientação profissional para adaptar o movimento.",
-    "media_url": "/media/exercises/calf-raise.svg",
-    "media_alt": "Ilustração animada e simplificada de uma elevação de calcanhares",
+    "media_url": null,
+    "media_alt": null,
     "substitutes": []
   }
 ]
